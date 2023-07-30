@@ -1,32 +1,53 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-
 import { useEffect } from 'react';
-import { fetchContactsThunk } from 'redux/contactSlice/thunk';
-import { getError, getIsLoading } from 'redux/selectors';
-import { Error } from './Heading/Heading.styled';
+import { Header } from './Header/Header';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { ContactListPage } from 'pages/ContactListPage';
+import { getIsRefreshing, refreshUserThunk } from 'redux/authSlice';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import SignupPage from 'pages/SingupPage';
+import LoginPage from 'pages/LoginPage';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const isRefreshing = useSelector(getIsRefreshing);
 
   useEffect(() => {
-    dispatch(fetchContactsThunk());
+    dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      {isLoading && <p> Loading...</p>}
-      {error && <Error>{error}</Error>}
-
-      <Filter />
-      <ContactList />
-    </div>
+  return isRefreshing ? (
+    <b> ..refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route
+          index
+          element={
+            <PrivateRoute redirectTo="/login">
+              <ContactListPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute restricted>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute restricted>
+              <SignupPage />
+            </PublicRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+    </Routes>
   );
 };

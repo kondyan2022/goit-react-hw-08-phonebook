@@ -19,6 +19,11 @@ export const handleFulfilledDelete = (state, { payload }) => {
   state.items = state.items.filter(({ id }) => id !== payload.id);
 };
 
+export const handleFulfilledEdit = (state, { payload }) => {
+  console.log(payload);
+  state.items = [...state.items.filter(({ id }) => id !== payload.id), payload];
+};
+
 export const handleRejected = (state, { error }) => {
   state.isLoading = false;
   state.error = error.message;
