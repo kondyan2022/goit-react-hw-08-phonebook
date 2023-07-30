@@ -6,9 +6,9 @@ export const authHandleFulfilled = state => {
   state.isPending = false;
 };
 export const authHandleFulfilledLoggedIn = (state, { payload }) => {
+  state.isLoggedIn = true;
   state.user = payload.user;
   state.token = payload.token;
-  state.isLoggedIn = true;
 };
 
 export const authHandleFulfilledLoggedOut = state => {
