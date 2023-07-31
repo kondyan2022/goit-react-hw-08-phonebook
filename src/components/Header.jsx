@@ -33,14 +33,21 @@ export const Header = () => {
       .unwrap()
       .then(() => {
         dispatch(resetState());
+        setAnchorEl(null);
       })
       .catch(e => toast.error(e));
   };
 
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <AppBar position="static">
-        {/* <Toolbar sx={{ flexDirection: { xs: 'column', sm: 'row' } }}> */}
         <Toolbar>
           <ContactPhoneIcon fontSize="large" />
           <Typography
@@ -53,43 +60,37 @@ export const Header = () => {
 
           {isLoggedIn && (
             <>
-              <div>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={event => {
-                    setAnchorEl(event.currentTarget);
-                  }}
-                  color="inherit"
-                >
-                  <PersonIcon fontSize={'large'} sx={{ mr: 1 }} />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={() => {
-                    setAnchorEl(null);
-                  }}
-                >
-                  <MenuItem>{email}</MenuItem>
-                  <Divider />
-                  <MenuItem onClick={handleClick}>
-                    <Button endIcon={<LoginOutlinedIcon />}>Logout</Button>
-                  </MenuItem>
-                </Menu>
-              </div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <PersonIcon fontSize={'large'} sx={{ mr: 1 }} />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem>{email}</MenuItem>
+                <Divider />
+                <MenuItem onClick={handleClick}>
+                  <Button endIcon={<LoginOutlinedIcon />}>Logout</Button>
+                </MenuItem>
+              </Menu>
             </>
           )}
         </Toolbar>
