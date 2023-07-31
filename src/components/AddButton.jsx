@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 export const AddButton = ({ onClick }) => {
   return createPortal(
@@ -15,4 +16,8 @@ export const AddButton = ({ onClick }) => {
     </Button>,
     document.querySelector('#modal-root')
   );
+};
+
+AddButton.propType = {
+  onClick: PropTypes.func.isRequired,
 };

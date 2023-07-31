@@ -9,6 +9,7 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 export default function AddContactForm({
   onSubmit,
@@ -79,7 +80,6 @@ export default function AddContactForm({
               type="tel"
               name="number"
               value={formik.values.number}
-              // pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               onChange={formik.handleChange}
               required
@@ -100,3 +100,15 @@ export default function AddContactForm({
     document.querySelector('#modal-root')
   );
 }
+
+AddContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  modalIsOpen: PropTypes.bool.isRequired,
+  formTitle: PropTypes.string,
+  itemData: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    number: PropTypes.string,
+  }),
+};

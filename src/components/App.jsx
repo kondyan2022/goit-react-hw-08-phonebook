@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { lazy, useEffect } from 'react';
-import { Header } from './Header/Header';
+import { Header } from './Header';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // import ContactListPage from 'pages/ContactListPage';
 import { getIsRefreshing, refreshUserThunk } from 'redux/authSlice';
