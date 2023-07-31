@@ -19,6 +19,9 @@ export const authHandleFulfilledLoggedOut = state => {
 
 export const authHandleRejected = state => {
   state.isPending = false;
+  state.user = { name: null, email: null };
+  state.token = null;
+  state.isLoggedIn = false;
 };
 export const authHandlePendingRefresh = state => {
   state.isRefreshing = true;
