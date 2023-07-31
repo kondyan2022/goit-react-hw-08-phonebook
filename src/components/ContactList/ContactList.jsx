@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk } from 'redux/contactSlice/thunk';
 import { getContacts, getFilter } from 'redux/selectors';
 import {
+  Box,
   Card,
   IconButton,
   Link,
@@ -35,35 +36,65 @@ const ContactList = ({ onEdit }) => {
     <List>
       {contactList.map(({ id, name, number }) => (
         <ListItem key={id}>
-          <Card sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-            <Typography variant="h5" sx={{ mr: 'auto', ml: 1 }}>
-              {`${name}`}
-            </Typography>
-            <Link
-              href={`tel:${number.replaceAll(/[ \-.()]/g, '')}`}
-              underline={'none'}
-            >
-              <Typography variant="h5" sx={{ mr: 1 }}>{`${number}`}</Typography>
-            </Link>
-            <IconButton
-              size="large"
-              color="inherit"
-              onClick={() => {
-                onEdit({ id: id, name: name, number: number });
+          <Card
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: { xs: 'column', sm: 'row' },
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',
               }}
             >
-              <EditIcon fontSize="inherit" />
-            </IconButton>
+              <Typography variant="h5" sx={{ mr: 'auto', ml: 1 }}>
+                {`${name}`}
+              </Typography>
+              <Link
+                href={`tel:${number.replaceAll(/[ \-.()]/g, '')}`}
+                underline={'none'}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{ mr: 1 }}
+                >{`${number}`}</Typography>
+              </Link>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                alignItems: 'center',
+              }}
+            >
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={() => {
+                  onEdit({ id: id, name: name, number: number });
+                }}
+              >
+                <EditIcon fontSize="inherit" />
+              </IconButton>
 
-            <IconButton
-              size="large"
-              color="inherit"
-              onClick={() => {
-                dispatch(deleteContactThunk(id));
-              }}
-            >
-              <DeleteForeverIcon fontSize="inherit" />
-            </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                onClick={() => {
+                  dispatch(deleteContactThunk(id));
+                }}
+              >
+                <DeleteForeverIcon fontSize="inherit" />
+              </IconButton>
+            </Box>
           </Card>
         </ListItem>
       ))}

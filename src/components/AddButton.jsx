@@ -1,16 +1,18 @@
 import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { createPortal } from 'react-dom';
 
 export const AddButton = ({ onClick }) => {
-  return (
+  return createPortal(
     <Button
       variant="contained"
       size="large"
       startIcon={<AddCircleOutlineIcon />}
       onClick={onClick}
-      sx={{ position: 'absolute', bottom: '10%', right: '20%' }}
+      sx={{ position: 'fixed', bottom: '10%', right: '40%' }}
     >
       Add contact
-    </Button>
+    </Button>,
+    document.querySelector('#modal-root')
   );
 };

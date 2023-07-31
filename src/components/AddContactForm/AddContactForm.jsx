@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { createPortal } from 'react-dom';
 
 export default function AddContactForm({
   onSubmit,
@@ -44,7 +45,7 @@ export default function AddContactForm({
     },
   });
 
-  return (
+  return createPortal(
     <div>
       <Dialog open={modalIsOpen} onClose={onCancel}>
         <Box component="form" noValidate onSubmit={formik.handleSubmit}>
@@ -95,6 +96,7 @@ export default function AddContactForm({
           </DialogActions>
         </Box>
       </Dialog>
-    </div>
+    </div>,
+    document.querySelector('#modal-root')
   );
 }

@@ -73,22 +73,6 @@ export const SignupForm = () => {
     navigate('/login', { replace: true });
   };
 
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-
-  //   dispatch(
-  //     signupUserThunk({
-  //       name: `${data.get('firstName').trim()} ${data.get('lastName').trim()}`,
-  //       email: data.get('email'),
-  //       password: data.get('password'),
-  //     })
-  //   )
-  //     .unwrap()
-  //     //   .then(() => navigate('/contacts', { replace: true }))
-  //     .catch();
-  // };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

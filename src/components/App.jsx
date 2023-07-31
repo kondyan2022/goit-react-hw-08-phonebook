@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Header } from './Header/Header';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ContactListPage } from 'pages/ContactListPage';
+// import ContactListPage from 'pages/ContactListPage';
 import { getIsRefreshing, refreshUserThunk } from 'redux/authSlice';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import SignupPage from 'pages/SingupPage';
-import LoginPage from 'pages/LoginPage';
+// import SignupPage from 'pages/SingupPage';
+// import LoginPage from 'pages/LoginPage';
+
+const ContactListPage = lazy(() => import('pages/ContactListPage'));
+const SignupPage = lazy(() => import('pages/SingupPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
 
 export const App = () => {
   const dispatch = useDispatch();

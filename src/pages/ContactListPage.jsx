@@ -13,7 +13,7 @@ import {
 } from 'redux/contactSlice/thunk';
 import { getContacts } from 'redux/selectors';
 
-export const ContactListPage = () => {
+const ContactListPage = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
@@ -69,7 +69,7 @@ export const ContactListPage = () => {
   };
 
   return (
-    <Container>
+    <Container component={'main'}>
       {modalIsOpen && (
         <AddContactForm
           modalIsOpen
@@ -85,3 +85,5 @@ export const ContactListPage = () => {
     </Container>
   );
 };
+
+export default ContactListPage;

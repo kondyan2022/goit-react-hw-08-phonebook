@@ -36,15 +36,19 @@ export const Header = () => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
           <ContactPhoneIcon fontSize="large" />
-          <Typography variant="h5" component="div" sx={{ ml: 2, flexGrow: 1 }}>
+          <Typography
+            variant={'h5'}
+            component="div"
+            sx={{ ml: 2, flexGrow: 1 }}
+          >
             Phonebook
           </Typography>
 
           {isLoggedIn && (
             <>
-              <PersonIcon fontSize="large" sx={{ mr: 1 }} />
+              <PersonIcon fontSize={'large'} sx={{ mr: 1 }} />
               <Typography variant="h6" component="div" sx={{ mr: 3 }}>
                 {userName}
               </Typography>
