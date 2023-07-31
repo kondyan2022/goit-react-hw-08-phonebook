@@ -25,6 +25,9 @@ export const authHandlePendingRefresh = state => {
 };
 export const authHandleRejectedRefresh = state => {
   state.isRefreshing = false;
+  state.user = { name: null, email: null };
+  state.token = null;
+  state.isLoggedIn = false;
 };
 export const authHandleFulfilledRefresh = (state, { payload }) => {
   state.isRefreshing = false;
